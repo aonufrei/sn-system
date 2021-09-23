@@ -1,18 +1,18 @@
 package com.onufrei.sn.mapper;
 
-import com.onufrei.sn.dto.AccountDto;
+import com.onufrei.sn.model.Account;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 @Mapper
 public interface AccountMapper {
-	int add(@Param("account") AccountDto accountDto);
+	int add(@Param("account") Account account);
 
-	int update(@Param("account") AccountDto accountDto);
+	int update(@Param("account") Account account);
 
 	void delete(@Param("id") Long accountId);
 
-	AccountDto getByUsername(@Param("username") String username);
+	Account getByUsername(@Param("username") String username);
 
 	Boolean exist(@Param("username") String username, @Param("password") String password);
 }

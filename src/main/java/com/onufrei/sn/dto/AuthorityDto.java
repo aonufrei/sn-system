@@ -1,4 +1,4 @@
-package com.onufrei.sn.model;
+package com.onufrei.sn.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,11 +9,11 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Authority {
+public class AuthorityDto {
 	private Long id;
 	private String name;
 
-	public Authority(String name) {
+	public AuthorityDto(String name) {
 		this.name = name;
 	}
 }

@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.onufrei.sn.mapper.AccountMapper">
 
-	<resultMap id="Account" type="com.onufrei.sn.dto.AccountDto">
+	<resultMap id="AccountResultMap" type="com.onufrei.sn.model.Account">
 		<id column="id" property="id"/>
 		<result column="username" property="username"/>
 		<result column="password" property="password"/>
@@ -11,35 +11,36 @@
 	</resultMap>
 
 
-	<select id="getByUsername" resultMap="Account">
+	<select id="getByUsername" resultMap="AccountResultMap">
 		select id, username, password, created_at, modified_at
-		from users
+		from accounts
 		where username = #{username}
 	</select>
 
-	<insert id="add" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.onufrei.sn.dto.AccountDto">
-		insert into users(id, username, password)
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.onufrei.sn.model.Account">
+		insert into accounts(id, username, password)
 		values (#{account.id},
 				#{account.username},
 				#{account.password})
 	</insert>
 
-	<update id="update" keyProperty="id" keyColumn="id" parameterType="com.onufrei.sn.dto.AccountDto">
-		update users
+	<update id="update" keyProperty="id" keyColumn="id" parameterType="com.onufrei.sn.model.Account">
+		update accounts
 		SET username    = #{account.username},
-			password    = #{account.password}
+			password    = #{account.password},
+		    modified_at = DEFAULT
 		WHERE id = #{account.id}
 	</update>
 
 	<update id="delete">
 		delete
-		from users
+		from accounts
 		where id = #{id}
 	</update>
 
 	<select id="exist" resultType="boolean">
 		select COUNT(*) > 0
-		FROM users
+		FROM accounts
 		WHERE username = #{username}
 		  AND password = #{password}
 	</select>

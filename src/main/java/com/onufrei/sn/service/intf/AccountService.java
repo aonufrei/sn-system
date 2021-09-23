@@ -1,17 +1,16 @@
 package com.onufrei.sn.service.intf;
 
-import com.onufrei.sn.dto.AccountDto;
 import com.onufrei.sn.model.Account;
 
 public interface AccountService {
 
-	Boolean add(AccountDto account);
+	Boolean add(Account account);
 
-	Boolean update(AccountDto account);
+	Boolean update(Account account);
 
 	void delete(Long accountId);
 
-	AccountDto getByUsername(String username);
+	Account getByUsername(String username);
 
 	Boolean exist(String username, String password);
 

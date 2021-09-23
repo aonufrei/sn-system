@@ -17,4 +17,9 @@ public class Account {
 	private String password;
 	private LocalDateTime createdAt;
 	private LocalDateTime modifiedAt;
+
+	public Account(String username, String password) {
+		this.username = username;
+		this.password = password;
+	}
 }

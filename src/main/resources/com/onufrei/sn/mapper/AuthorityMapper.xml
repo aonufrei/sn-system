@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onufrei.sn.mapper.AuthorityMapper">
+
+	<resultMap id="AuthorityResultMap" type="com.onufrei.sn.model.Authority">
+		<id column="id" property="id"/>
+		<result column="name" property="name"/>
+	</resultMap>
+
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.onufrei.sn.model.Authority">
+		insert into authorities(id, name)
+		values (DEFAULT,
+				#{authority.name})
+	</insert>
+
+	<insert id="addToAccount">
+		insert into user_and_authority
+			values (#{account_id}, #{authority_id})
+	</insert>
+
+	<update id="update" keyProperty="id" keyColumn="id" parameterType="com.onufrei.sn.model.Authority">
+		update authorities
+		SET name = #{authority.name}
+		WHERE id = #{authority.id};
+	</update>
+
+	<update id="delete">
+		delete
+		from authorities
+		where id = #{id}
+	</update>
+
+	<select id="getById" parameterType="long" resultMap="AuthorityResultMap">
+		select *
+		from authorities
+		where id = #{id};
+	</select>
+
+	<select id="getAll" resultMap="AuthorityResultMap">
+		select *
+		from authorities;
+	</select>
+
+
+</mapper>

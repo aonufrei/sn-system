@@ -1,6 +1,5 @@
 package com.onufrei.sn.service.impl;
 
-import com.onufrei.sn.dto.AccountDto;
 import com.onufrei.sn.mapper.AccountMapper;
 import com.onufrei.sn.model.Account;
 import com.onufrei.sn.service.intf.AccountService;
@@ -16,12 +15,12 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public Boolean add(AccountDto account) {
+	public Boolean add(Account account) {
 		return mapper.add(account) > 0;
 	}
 
 	@Override
-	public Boolean update(AccountDto account) {
+	public Boolean update(Account account) {
 		return mapper.update(account) > 0;
 	}
 
@@ -31,7 +30,7 @@ public class AccountServiceImpl implements AccountService {
 	}
 
 	@Override
-	public AccountDto getByUsername(String username){
+	public Account getByUsername(String username){
 		return mapper.getByUsername(username);
 	}
 
@@ -40,8 +39,8 @@ public class AccountServiceImpl implements AccountService {
 		return mapper.exist(username, password);
 	}
 
-	public static AccountDto modelToDto(Account model) {
-		return AccountDto.builder()
+	public static Account modelToDto(Account model) {
+		return Account.builder()
 				.id(model.getId())
 				.username(model.getUsername())
 				.password(model.getPassword())
@@ -49,15 +48,4 @@ public class AccountServiceImpl implements AccountService {
 				.modifiedAt(model.getModifiedAt())
 				.build();
 	}
-
-	public static Account dtoToModel(AccountDto dto) {
-		return Account.builder()
-				.id(dto.getId())
-				.username(dto.getUsername())
-				.password(dto.getPassword())
-				.createdAt(dto.getCreatedAt())
-				.modifiedAt(dto.getModifiedAt())
-				.build();
-	}
-
 }

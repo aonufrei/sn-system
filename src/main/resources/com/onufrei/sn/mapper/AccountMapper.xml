@@ -29,7 +29,7 @@
 		SET username    = #{account.username},
 			password    = #{account.password},
 		    modified_at = DEFAULT
-		WHERE id = #{account.id}
+		WHERE id = #{id}
 	</update>
 
 	<update id="delete">

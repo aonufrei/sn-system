@@ -3,6 +3,7 @@ package com.onufrei.sn.dao;
 import com.onufrei.sn.dto.AccountDto;
 import com.onufrei.sn.dto.AccountInDto;
 import com.onufrei.sn.mapper.AccountMapper;
+import com.onufrei.sn.model.Account;
 import com.onufrei.sn.utils.AccountUtils;
 import org.springframework.stereotype.Service;
 
@@ -15,12 +16,14 @@ public class AccountDao {
 		this.accountMapper = accountMapper;
 	}
 
-	public int add(AccountInDto accountInDto) {
-		return accountMapper.add(AccountUtils.toModel(accountInDto));
+	public Long add(AccountInDto accountInDto) {
+		Account accountToInsert = AccountUtils.toModel(accountInDto);
+		accountMapper.add(accountToInsert);
+		return accountToInsert.getId();
 	}
 
-	public int update(AccountInDto account) {
-		return accountMapper.update(AccountUtils.toModel(account));
+	public int update(Long id, AccountInDto account) {
+		return accountMapper.update(id, AccountUtils.toModel(account));
 	}
 
 	public void delete(Long accountId) {

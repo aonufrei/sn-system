@@ -3,6 +3,7 @@ package com.onufrei.sn.dao;
 import com.onufrei.sn.dto.AuthorityDto;
 import com.onufrei.sn.dto.AuthorityInDto;
 import com.onufrei.sn.mapper.AuthorityMapper;
+import com.onufrei.sn.model.Authority;
 import com.onufrei.sn.utils.AuthorityUtils;
 import org.springframework.stereotype.Service;
 
@@ -18,16 +19,18 @@ public class AuthorityDao {
 		this.authorityMapper = authorityMapper;
 	}
 
-	public int add(AuthorityInDto authority) {
-		return authorityMapper.add(AuthorityUtils.toModel(authority));
+	public Long add(AuthorityInDto authority) {
+		Authority authorityToInsert = AuthorityUtils.toModel(authority);
+		authorityMapper.add(authorityToInsert);
+		return authorityToInsert.getId();
 	}
 
 	public int addToAccount(Long accountId, Long authorityId) {
 		return authorityMapper.addToAccount(accountId, authorityId);
 	}
 
-	public int update(AuthorityInDto authority) {
-		return authorityMapper.update(AuthorityUtils.toModel(authority));
+	public int update(Long id, AuthorityInDto authority) {
+		return authorityMapper.update(id, AuthorityUtils.toModel(authority));
 	}
 
 	public void delete(Long id) {

@@ -1,25 +1,24 @@
-package com.onufrei.sn.model;
+package com.onufrei.sn.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Profile {
-	private Long id;
+public class ProfileInDto {
 	private String name;
 	private String status;
 	private Long accountId;
+	@JsonProperty("date_of_birth")
 	private LocalDate dateOfBirth;
+	@JsonProperty("profile_image_url")
 	private LocalDate profileImageUrl;
 	private String hobbies;
-	private LocalDateTime createdAt;
-	private LocalDateTime modifiedAt;
 }

@@ -17,8 +17,8 @@ public class AccountService {
 		this.authorityService = authorityService;
 	}
 
-	public Boolean add(AccountInDto account) {
-		return accountDao.add(account) > 0;
+	public Long add(AccountInDto account) {
+		return accountDao.add(account);
 	}
 
 	public Boolean register(AccountInDto account) {
@@ -27,7 +27,7 @@ public class AccountService {
 				.password(DigestUtils.sha256Hex(account.getPassword()))
 				.build();
 
-		if (accountDao.getByUsername(account.getUsername()) == null && add(accountWithHashedPassword)) {
+		if (accountDao.getByUsername(account.getUsername()) == null && add(accountWithHashedPassword) != null) {
 			authorityService.addToAccount(getByUsername(account.getUsername()).getId(), 2L);
 			return true;
 		}
@@ -35,8 +35,8 @@ public class AccountService {
 		return false;
 	}
 
-	public Boolean update(AccountInDto account) {
-		return accountDao.update(account) > 0;
+	public Boolean update(Long accountId, AccountInDto account) {
+		return accountDao.update(accountId, account) > 0;
 	}
 
 	public void delete(Long accountId) {

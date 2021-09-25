@@ -8,7 +8,7 @@ import org.apache.ibatis.annotations.Param;
 public interface AccountMapper {
 	int add(@Param("account") Account account);
 
-	int update(@Param("account") Account account);
+	int update(@Param("id") Long id, @Param("account") Account account);
 
 	void delete(@Param("id") Long accountId);
 

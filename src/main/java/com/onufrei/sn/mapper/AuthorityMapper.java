@@ -13,7 +13,7 @@ public interface AuthorityMapper {
 
 	int addToAccount(@Param("account_id") Long accountId, @Param("authority_id") Long authorityId);
 
-	int update(@Param("authority") Authority authority);
+	int update(@Param("id") Long id, @Param("authority") Authority authority);
 
 	void delete(@Param("id") Long id);
 

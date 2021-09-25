@@ -21,7 +21,7 @@
 	<update id="update" keyProperty="id" keyColumn="id" parameterType="com.onufrei.sn.model.Authority">
 		update authorities
 		SET name = #{authority.name}
-		WHERE id = #{authority.id};
+		WHERE id = #{id};
 	</update>
 
 	<update id="delete">

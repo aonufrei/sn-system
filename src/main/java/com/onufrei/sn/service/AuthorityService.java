@@ -16,16 +16,16 @@ public class AuthorityService {
 		this.authorityDao = authorityDao;
 	}
 
-	public Boolean add(AuthorityInDto authority) {
-		return authorityDao.add(authority) > 0;
+	public Long add(AuthorityInDto authority) {
+		return authorityDao.add(authority);
 	}
 
 	public Boolean addToAccount(Long accountId, Long authorityId) {
 		return authorityDao.addToAccount(accountId, authorityId) > 0;
 	}
 
-	public Boolean update(AuthorityInDto authority) {
-		return authorityDao.update(authority) > 0;
+	public Boolean update(Long authorityId, AuthorityInDto authority) {
+		return authorityDao.update(authorityId, authority) > 0;
 	}
 
 	public void delete(Long id) {

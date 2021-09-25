@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onufrei.sn.mapper.ProfileMapper">
+
+	<resultMap id="ProfileResultMap" type="com.onufrei.sn.model.Profile">
+		<id column="id" property="id"/>
+		<result column="user_id" property="accountId"/>
+		<result column="name" property="name"/>
+		<result column="date_of_birth" property="dateOfBirth"/>
+		<result column="profile_image_url" property="profileImageUrl"/>
+		<result column="hobbies" property="hobbies"/>
+		<result column="status" property="status"/>
+		<result column="created_at" property="createdAt"/>
+		<result column="modified_at" property="modifiedAt"/>
+	</resultMap>
+
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.onufrei.sn.model.Profile">
+		insert into user_profiles(user_id, name, date_of_birth, profile_image_url, hobbies, status)
+		values ( #{profile.accountId},
+		        #{profile.name},
+		        #{profile.dateOfBirth},
+		        #{profile.profileImageUrl},
+		        #{profile.hobbies},
+		        #{profile.status}
+				)
+	</insert>
+
+	<update id="update" keyProperty="id" keyColumn="id" parameterType="com.onufrei.sn.model.Profile">
+		update user_profiles
+		SET user_id = #{profile.accountId},
+			name = #{profile.name},
+			date_of_birth = #{profile.dateOfBirth},
+			profile_image_url = #{profile.profileImageUrl},
+			hobbies = #{profile.hobbies},
+			status = #{profile.status}
+		WHERE id = #{id}
+
+	</update>
+
+	<delete id="delete">
+		delete from user_profiles
+		where id = #{id}
+	</delete>
+
+	<select id="getByAccountId" resultMap="ProfileResultMap">
+		select up.id, user_id, name, date_of_birth, profile_image_url, hobbies, status, up.created_at, up.modified_at
+		from user_profiles up
+		left outer join accounts a on up.user_id = a.id
+		where a.id = #{accountId}
+	</select>
+
+	<select id="getById" resultMap="ProfileResultMap">
+		select id, user_id, name, date_of_birth, profile_image_url, hobbies, status, created_at, modified_at
+		from user_profiles
+		where id = #{id}
+	</select>
+
+
+</mapper>

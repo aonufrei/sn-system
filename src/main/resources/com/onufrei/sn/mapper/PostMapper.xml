@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.onufrei.sn.mapper.PostMapper">
+
+	<resultMap id="PostResultMap" type="com.onufrei.sn.model.Post">
+		<id column="id" property="id"/>
+		<result column="user_profile_id" property="profileId"/>
+		<result column="content" property="content"/>
+		<result column="created_at" property="createdAt"/>
+		<result column="modified_at" property="modifiedAt"/>
+	</resultMap>
+
+	<insert id="add" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.onufrei.sn.model.Post">
+		insert into posts(user_profile_id, content)
+		values (#{post.profileId}, #{post.content})
+	</insert>
+
+	<update id="update" keyProperty="id" keyColumn="id" parameterType="com.onufrei.sn.model.Post">
+		update posts
+		SET user_profile_id = #{post.profileId},
+			content = #{post.content}
+		WHERE id = #{id}
+	</update>
+
+	<delete id="delete">
+		delete from posts
+		where id = #{id}
+	</delete>
+
+	<select id="getByUser" resultMap="PostResultMap">
+		select p.id, p.user_profile_id, p.content, p.created_at, p.modified_at
+		from posts p
+		left join user_profiles up on p.user_profile_id = up.id
+		where up.id = #{user_id}
+		order by modified_at <choose><when test="newest == true">DESC</when><otherwise>ASC</otherwise></choose>
+		limit #{offset}, #{limit}
+	</select>
+
+	<select id="getForUser" resultMap="PostResultMap">
+		select id, user_profile_id, content, created_at, modified_at
+		from posts
+		where user_profile_id != #{user_id}
+		order by modified_at <choose><when test="newest == true">DESC</when><otherwise>ASC</otherwise></choose>
+		limit #{offset}, #{limit}
+# 	TODO: Implement something wiser
+	</select>
+
+	<select id="getById" resultMap="PostResultMap">
+		select id, user_profile_id, content, created_at, modified_at
+		from posts
+		where id = #{id}
+	</select>
+
+</mapper>

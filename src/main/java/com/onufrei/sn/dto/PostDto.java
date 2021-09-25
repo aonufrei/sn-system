@@ -1,5 +1,6 @@
-package com.onufrei.sn.model;
+package com.onufrei.sn.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -11,10 +12,13 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class Post {
+public class PostDto {
 	private Long id;
+	@JsonProperty("profile_id")
 	private Integer profileId;
 	private String content;
+	@JsonProperty("created_at")
 	private LocalDateTime createdAt;
+	@JsonProperty("modified_at")
 	private LocalDateTime modifiedAt;
 }

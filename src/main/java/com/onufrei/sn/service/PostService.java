@@ -1,8 +1,11 @@
 package com.onufrei.sn.service;
 
+import com.onufrei.sn.dao.LikeDao;
 import com.onufrei.sn.dao.PostDao;
 import com.onufrei.sn.dto.PostDto;
 import com.onufrei.sn.dto.PostInDto;
+import com.onufrei.sn.exceptions.LikeException;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +14,11 @@ import java.util.List;
 public class PostService {
 
 	private final PostDao postDao;
+	private final LikeDao likeDao;
 
-	public PostService(PostDao postDao) {
+	public PostService(PostDao postDao, @Qualifier("PostLikeDao") LikeDao likeDao) {
 		this.postDao = postDao;
+		this.likeDao = likeDao;
 	}
 
 	public Long add(PostInDto post) {
@@ -40,4 +45,19 @@ public class PostService {
 		return postDao.getForUser(userId, newest, offset, limit);
 	}
 
+	void like(Long postId, Long profileId) throws LikeException {
+		likeDao.like(postId, profileId);
+	}
+
+	void dislike(Long postId, Long profileId) {
+		likeDao.dislike(postId, profileId);
+	}
+
+	Long countLikes(Long postId) {
+		return likeDao.countLikes(postId);
+	}
+
+	Boolean wasLikedBy(Long postId, Long profileId) {
+		return likeDao.wasLikedBy(postId, profileId);
+	}
 }

@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class PostInDto {
 	@JsonProperty("profile_id")
-	private Integer profileId;
+	private Long profileId;
 	private String content;
 }

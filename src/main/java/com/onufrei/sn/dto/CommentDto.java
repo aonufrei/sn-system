@@ -1,6 +1,7 @@
 package com.onufrei.sn.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.onufrei.sn.constants.CommentType;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,11 +13,15 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class PostDto {
+public class CommentDto {
 	private Long id;
 	@JsonProperty("profile_id")
 	private Long profileId;
 	private String content;
+	@JsonProperty("target_post_id")
+	private Long targetPostId;
+	@JsonProperty("target_comment_id")
+	private Long targetCommentId;
 	@JsonProperty("created_at")
 	private LocalDateTime createdAt;
 	@JsonProperty("modified_at")

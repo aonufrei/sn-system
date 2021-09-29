@@ -49,6 +49,8 @@ public class MyBatisConfiguration {
 		sessionFactory.setMapperLocations(new PathMatchingResourcePatternResolver()
 				.getResources("classpath:com/onufrei/sn/mapper/*.xml"));
 
+		sessionFactory.setTypeHandlersPackage("com/onufrei/sn/typehandler");
+
 		org.apache.ibatis.session.Configuration configuration = new org.apache.ibatis.session.Configuration();
 		configuration.setMapUnderscoreToCamelCase(true);
 		sessionFactory.setConfiguration(configuration);

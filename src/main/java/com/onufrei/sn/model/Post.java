@@ -13,7 +13,7 @@ import java.time.LocalDateTime;
 @Builder
 public class Post {
 	private Long id;
-	private Integer profileId;
+	private Long profileId;
 	private String content;
 	private LocalDateTime createdAt;
 	private LocalDateTime modifiedAt;

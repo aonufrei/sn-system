@@ -21,7 +21,7 @@ public class ProfileDto {
 	@JsonProperty("date_of_birth")
 	private LocalDate dateOfBirth;
 	@JsonProperty("profile_image_url")
-	private LocalDate profileImageUrl;
+	private String profileImageUrl;
 	private String hobbies;
 	@JsonProperty("created_at")
 	private LocalDateTime createdAt;

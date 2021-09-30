@@ -18,7 +18,7 @@ public class Profile {
 	private String status;
 	private Long accountId;
 	private LocalDate dateOfBirth;
-	private LocalDate profileImageUrl;
+	private String profileImageUrl;
 	private String hobbies;
 	private LocalDateTime createdAt;
 	private LocalDateTime modifiedAt;

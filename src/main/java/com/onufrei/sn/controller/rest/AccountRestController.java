@@ -1,7 +1,8 @@
 package com.onufrei.sn.controller.rest;
 
-import com.onufrei.sn.dto.AccountInDto;
-import com.onufrei.sn.service.AccountService;
+import com.onufrei.sn.dto.AccountRegistrationInDto;
+import com.onufrei.sn.service.ProfileService;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -11,20 +12,19 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/accounts")
 public class AccountRestController {
 
-	private final AccountService accountService;
+	private final ProfileService profileService;
 
-	public AccountRestController(AccountService accountService) {
-		this.accountService = accountService;
+	public AccountRestController(ProfileService profileService) {
+		this.profileService = profileService;
 	}
 
-	@PostMapping("/management")
-	public Boolean register(@RequestBody AccountInDto account) {
-		return accountService.register(account);
+	@PostMapping("/unregister/{id}")
+	public void unregister(@PathVariable Long id) {
+		profileService.unregister(id);
 	}
 
-	@PostMapping("/management/unregister")
-	public void unregister() {
-		//TODO: check if user is authorized, get id of user and delete it
+	@PostMapping("/register")
+	public Long registerNewUser(@RequestBody AccountRegistrationInDto newUserProfile) {
+		return profileService.register(newUserProfile);
 	}
-
 }

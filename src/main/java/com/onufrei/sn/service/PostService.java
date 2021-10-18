@@ -45,19 +45,19 @@ public class PostService {
 		return postDao.getForUser(userId, newest, offset, limit);
 	}
 
-	void like(Long postId, Long profileId) throws LikeException {
+	public void like(Long postId, Long profileId) throws LikeException {
 		likeDao.like(postId, profileId);
 	}
 
-	void dislike(Long postId, Long profileId) {
+	public void dislike(Long postId, Long profileId) {
 		likeDao.dislike(postId, profileId);
 	}
 
-	Long countLikes(Long postId) {
+	public Long countLikes(Long postId) {
 		return likeDao.countLikes(postId);
 	}
 
-	Boolean wasLikedBy(Long postId, Long profileId) {
+	public Boolean wasLikedBy(Long postId, Long profileId) {
 		return likeDao.wasLikedBy(postId, profileId);
 	}
 }

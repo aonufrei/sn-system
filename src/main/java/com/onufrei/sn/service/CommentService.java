@@ -41,19 +41,19 @@ public class CommentService {
 		return commentDao.getForPost(id, newest, offset, limit);
 	}
 
-	void like(Long commentId, Long profileId) throws LikeException {
+	public void like(Long commentId, Long profileId) throws LikeException {
 		likeDao.like(commentId, profileId);
 	}
 
-	void dislike(Long commentId, Long profileId) {
+	public void dislike(Long commentId, Long profileId) {
 		likeDao.dislike(commentId, profileId);
 	}
 
-	Long countLikes(Long commentId) {
+	public Long countLikes(Long commentId) {
 		return likeDao.countLikes(commentId);
 	}
 
-	Boolean wasLikedBy(Long commentId, Long profileId) {
+	public Boolean wasLikedBy(Long commentId, Long profileId) {
 		return likeDao.wasLikedBy(commentId, profileId);
 	}
 
